@@ -101,20 +101,20 @@
         <h1 id="playMusic">
             I Love You <span class="heart">❤️</span>
         </h1>
-        <audio id="backgroundMusic">
+        <audio id="backgroundMusic" autoplay>
             <source src="./Night Changes Status  English Song Status  One Direction Status  New WhatsApp Status.mp3" type="audio/mpeg">
             Your browser does not support the audio tag.
         </audio>
         <p class="message">For the most special person in my life 🌸</p>
     </div>
     <script>
-        // Get the audio and the text element
+        // Ensure the audio starts in muted mode to comply with browser autoplay policies
         const audio = document.getElementById("backgroundMusic");
-        const playText = document.getElementById("playMusic");
+        audio.muted = false; // Unmute if autoplay works
 
-        // Add a click event listener to the text
-        playText.addEventListener("click", () => {
-            audio.play(); // Start playing the audio
+        // Add an event listener to unmute on user interaction
+        document.body.addEventListener("click", () => {
+            audio.muted = false;
         });
     </script>
 </body>
