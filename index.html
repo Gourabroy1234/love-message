@@ -52,7 +52,6 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        /* Heart Animation */
         h1 .heart {
             display: inline-block;
             animation: heartBeat 1s infinite;
@@ -94,10 +93,44 @@
                 opacity: 0.6;
             }
         }
+
+        #namePrompt {
+            font-size: 1.5rem;
+            color: #d63384;
+            text-align: center;
+        }
+
+        #nameInput {
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #d63384;
+            border-radius: 5px;
+        }
+
+        #submitName {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #d63384;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #submitName:hover {
+            background-color: #ff3366;
+        }
     </style>
 </head>
 <body>
-    <div>
+    <div id="nameForm">
+        <p id="namePrompt">Enter the name of your special person:</p>
+        <input type="text" id="nameInput" placeholder="Enter name here">
+        <button id="submitName">Submit</button>
+    </div>
+
+    <div id="lovePage" style="display: none;">
         <h1 id="playMusic">
             I Love You <span class="heart">❤️</span>
         </h1>
@@ -107,14 +140,27 @@
         </audio>
         <p class="message">For the most special person in my life 🌸</p>
     </div>
-    <script>
-        // Ensure the audio starts in muted mode to comply with browser autoplay policies
-        const audio = document.getElementById("backgroundMusic");
-        audio.muted = false; // Unmute if autoplay works
 
-        // Add an event listener to unmute on user interaction
+    <script>
+        const nameInput = document.getElementById("nameInput");
+        const submitName = document.getElementById("submitName");
+        const nameForm = document.getElementById("nameForm");
+        const lovePage = document.getElementById("lovePage");
+        const audio = document.getElementById("backgroundMusic");
+
+        submitName.addEventListener("click", () => {
+            const name = nameInput.value.trim();
+            if (name.toLowerCase() === "cheri") {
+                nameForm.style.display = "none";
+                lovePage.style.display = "flex";
+                audio.muted = false; // Play music
+            } else {
+                alert("Name does not match. Please try again!");
+            }
+        });
+
         document.body.addEventListener("click", () => {
-            audio.muted = false;
+            audio.muted = false; // Unmute on interaction
         });
     </script>
 </body>
